@@ -2,6 +2,8 @@ package com.as.enrollment_service.dto;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class CourseResponse {
 
@@ -12,4 +14,5 @@ public class CourseResponse {
     private String categoryName;
     private Long instructorId;
     private String instructorName;
+    private List<SectionResponse> sections;
 }

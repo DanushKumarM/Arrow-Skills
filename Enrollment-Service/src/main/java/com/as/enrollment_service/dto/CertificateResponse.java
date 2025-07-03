@@ -17,8 +17,6 @@ public class CertificateResponse {
 
     private Long userId;
     private Long courseId;
-
     private String certificateUrl;
-
     private LocalDateTime issuedAt;
 }

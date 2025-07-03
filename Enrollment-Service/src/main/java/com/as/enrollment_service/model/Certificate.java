@@ -1,9 +1,6 @@
 package com.as.enrollment_service.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,6 +25,10 @@ public class Certificate  {
     private String certificateUrl;
 
     private LocalDateTime issuedAt;
+
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] pdf;
 
     public void onIssue() {
         this.issuedAt = LocalDateTime.now();
