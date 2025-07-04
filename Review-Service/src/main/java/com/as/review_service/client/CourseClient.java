@@ -1,6 +1,6 @@
-package com.as.enrollment_service.client;
+package com.as.review_service.client;
 
-import com.as.enrollment_service.dto.CourseResponse;
+import com.as.review_service.dto.CourseResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -14,23 +14,24 @@ import org.springframework.web.client.RestTemplate;
 @RequiredArgsConstructor
 public class CourseClient {
 
+    private final RestTemplate restTemplate;
+
     @Value("${course.service.url:http://localhost:8081}")
-    private String courseUrl;
+    private String courseServiceUrl;
 
-
-    private  final RestTemplate restTemplate;
-
-    public CourseResponse getCourseById(Long id, String token) {
+    public CourseResponse getCourseById(Long courseId, String token) {
         HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", token); // Add token
-        HttpEntity<Void> entity = new HttpEntity<>(headers);
+        headers.set("Authorization", token);
+        HttpEntity<Void> request = new HttpEntity<>(headers);
+
+        String url = courseServiceUrl + "/api/courses/{id}";
 
         ResponseEntity<CourseResponse> response = restTemplate.exchange(
-                courseUrl + "/api/courses/{id}",
+                url,
                 HttpMethod.GET,
-                entity,
+                request,
                 CourseResponse.class,
-                id
+                courseId
         );
         return response.getBody();
     }
