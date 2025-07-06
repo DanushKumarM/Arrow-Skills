@@ -2,10 +2,6 @@ package com.as.review_service.mapper;
 
 import com.as.review_service.dto.ReviewResponse;
 import com.as.review_service.model.Review;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component

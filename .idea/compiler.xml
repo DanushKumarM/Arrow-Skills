@@ -19,13 +19,14 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
       </profile>
-      <profile name="Annotation profile for Review-Service" enabled="true">
+      <profile name="Annotation profile for Payment-Service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
         </processorPath>
+        <module name="Payment-Service" />
         <module name="Review-Service" />
         <module name="Enrollment-Service" />
       </profile>
@@ -35,6 +36,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Course-Service" options="-parameters" />
       <module name="Enrollment-Service" options="-parameters" />
+      <module name="Payment-Service" options="-parameters" />
       <module name="Review-Service" options="-parameters" />
       <module name="User-Service" options="-parameters" />
     </option>
