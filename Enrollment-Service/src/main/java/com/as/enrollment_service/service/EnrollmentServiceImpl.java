@@ -7,6 +7,7 @@ import com.as.enrollment_service.dto.EnrollmentResponse;
 
 import com.as.enrollment_service.dto.UserResponse;
 import com.as.enrollment_service.enums.Role;
+import com.as.enrollment_service.kafka.KafkaProducerService;
 import com.as.enrollment_service.mapper.EnrollmentMapper;
 import com.as.enrollment_service.model.Enrollment;
 import com.as.enrollment_service.repository.EnrollmentRepository;
@@ -26,6 +27,7 @@ public class EnrollmentServiceImpl implements EnrollmentService {
     private final CourseClient courseClient;
     private final EnrollmentRepository enrollmentRepository;
     private final EnrollmentMapper enrollmentMapper;
+    private final KafkaProducerService kafkaProducerService;
 
     @Override
     public EnrollmentResponse enroll(Long userId, Long courseId, String token) {
@@ -46,6 +48,11 @@ public class EnrollmentServiceImpl implements EnrollmentService {
         enrollmentResponse.setEnrolledAt(LocalDateTime.now());
 
         Enrollment enrollment = enrollmentRepository.save(enrollmentResponse);
+
+        String message = String.format("User %s (%s) enrolled in course %s (%s)",
+                user.getName(), user.getId(), course.getTitle(), course.getId());
+
+        kafkaProducerService.sendEnrollmentNotification(message);
         return enrollmentMapper.toResponse(enrollment);
     }
 

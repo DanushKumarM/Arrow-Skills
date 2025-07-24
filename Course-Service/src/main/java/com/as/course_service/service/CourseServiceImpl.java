@@ -3,6 +3,7 @@ package com.as.course_service.service;
 import com.as.course_service.client.InstructorClient;
 import com.as.course_service.dto.CourseRequest;
 import com.as.course_service.dto.CourseResponse;
+import com.as.course_service.kafka.KafkaProducerService;
 import com.as.course_service.mapper.CourseMapper;
 import com.as.course_service.model.Category;
 import com.as.course_service.model.Course;
@@ -22,6 +23,7 @@ public class CourseServiceImpl implements  CourseService{
     private final CourseMapper courseMapper;
     private final CategoryRepository categoryRepository;
     private final InstructorClient instructorClient;
+    private final KafkaProducerService kafkaProducerService;
 
 
     @Override
@@ -33,6 +35,10 @@ public class CourseServiceImpl implements  CourseService{
         Course course = courseMapper.toEntity(request,category);
         String instructorName = instructorClient.getInstructorName(course.getInstructorId(), token);
         Course savedCourse = courseRepository.save(course);
+
+        String message = String.format("New course created: %s by Instructor %s",
+                course.getTitle(), course.getInstructorId());
+        kafkaProducerService.sendCourseCreatedNotification(message);
 
         return  courseMapper.toResponse(savedCourse, instructorName);
     }

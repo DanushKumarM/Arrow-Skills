@@ -3,6 +3,7 @@ package com.as.User_Service.security;
 import com.as.User_Service.model.User;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -10,7 +11,8 @@ import java.util.Date;
 @Component
 public class JwtUtil {
 
-    private final String SECRET_KEY = "ZGhhbnVzaGt1bWFyU3VuaXRoYVJhbWFrcmlzaG5hMTM=";
+    private final String SECRET_KEY="************";
+
 
     public String generateToken(User user) {
         return Jwts.builder()

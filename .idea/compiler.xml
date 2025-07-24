@@ -11,7 +11,6 @@
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
         </processorPath>
-        <module name="Course-Service" />
         <module name="User-Service" />
       </profile>
       <profile name="Maven default annotation processors profile" enabled="true">
@@ -19,16 +18,18 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
       </profile>
-      <profile name="Annotation profile for Payment-Service" enabled="true">
+      <profile name="Annotation profile for Course-Service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
         </processorPath>
+        <module name="Course-Service" />
+        <module name="Notification-Service" />
+        <module name="Enrollment-Service" />
         <module name="Payment-Service" />
         <module name="Review-Service" />
-        <module name="Enrollment-Service" />
       </profile>
     </annotationProcessing>
   </component>
@@ -36,6 +37,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Course-Service" options="-parameters" />
       <module name="Enrollment-Service" options="-parameters" />
+      <module name="Notification-Service" options="-parameters" />
       <module name="Payment-Service" options="-parameters" />
       <module name="Review-Service" options="-parameters" />
       <module name="User-Service" options="-parameters" />
